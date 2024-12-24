@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Number;
+use App\Models\Employer;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobList>
@@ -18,7 +19,8 @@ class JobListFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->jobTitle(),
+            'employer_id' => Employer::factory(),
             'pay' => "20.000"
         ];
     }
