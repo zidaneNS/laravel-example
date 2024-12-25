@@ -8,14 +8,14 @@ Route::get('/', function () {
 });
 
 Route::get('/jobs', function () {
-    $jobs = JobList::all();
+    $jobs = JobList::with('employer')->simplePaginate(3);
     return view('jobs', ["jobs" => $jobs]);
 });
 
 Route::get('/job/{id}', function ($id) {
 
     $job = JobList::find($id);
-    
+
     return view('job', ["job" => $job]);
 });
 
