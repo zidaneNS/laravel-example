@@ -32,6 +32,37 @@ Route::post('/jobs', function () {
     return redirect('/jobs');
 });
 
+Route::put('jobs/{id}', function ($id) {
+    // validate
+    request()->validate([
+        "name" => "required|min:3",
+        "pay" => "required"
+    ]);
+    // authorization
+    // update
+    JobList::findOrFail($id)->update([
+        "name" => request()->name,
+        "pay" => request()->pay,
+        "employer_id" => 1
+    ]);
+    // redirect
+    return redirect('/jobs');
+});
+
+Route::delete('jobs/{id}', function ($id) {
+    // authorization
+    // delete
+    JobList::find( $id )->delete();
+    // redirect
+    return redirect('/jobs');
+});
+
+Route::get('/jobs/{id}/update', function ($id) {
+    $job = JobList::find($id);
+
+    return view('jobs.update', ["job" => $job]);
+});
+
 Route::get('/jobs/{id}', function ($id) {
 
     $job = JobList::find($id);
