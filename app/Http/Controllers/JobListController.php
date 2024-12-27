@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class JobListController extends Controller
 {
     public function index () {
-        $jobs = JobList::with('employer')->latest()->simplePaginate(3);
-        return view('jobs.index', ['jobs' => $jobs]);
+        $joblist = JobList::with('employer')->latest()->simplePaginate(3);
+        return view('jobs.index', ['joblist' => $joblist]);
     }
 
     public function store () {
@@ -32,11 +32,11 @@ class JobListController extends Controller
         return view('jobs.create');
     }
 
-    public function show (JobList $job) {
-        return view('jobs.show', ['job' => $job]);
+    public function show (JobList $joblist) {
+        return view('jobs.show', ['joblist' => $joblist]);
     }
 
-    public function update (JobList $job) {
+    public function update (JobList $joblist) {
         // validate
         request()->validate([
             "name" => "required|min:3",
@@ -44,7 +44,7 @@ class JobListController extends Controller
         ]);
         // authorization
         // update
-        JobList::findOrFail($job->id)->update([
+        JobList::findOrFail($joblist->id)->update([
             "name" => request()->name,
             "pay" => request()->pay,
             "employer_id" => 1
@@ -53,15 +53,15 @@ class JobListController extends Controller
         return redirect('/jobs');
     }
 
-    public function destroy (JobList $job) {
+    public function destroy (JobList $joblist) {
         // authorization
         // delete
-        JobList::find( $job->id )->delete();
+        JobList::find( $joblist->id )->delete();
         // redirect
         return redirect('/jobs');
     }
 
-    public function edit (JobList $job) {
-        return view('jobs.edit', ['job' => $job]);
+    public function edit (JobList $joblist) {
+        return view('jobs.edit', ['joblist' => $joblist]);
     }
 }

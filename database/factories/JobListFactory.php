@@ -21,7 +21,7 @@ class JobListFactory extends Factory
         return [
             'name' => fake()->jobTitle(),
             'employer_id' => Employer::factory(),
-            'pay' => "20.000"
+            'pay' => fake()->randomFloat(2, 10000, 50000)
         ];
     }
 }

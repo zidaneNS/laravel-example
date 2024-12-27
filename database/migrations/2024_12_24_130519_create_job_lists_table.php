@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Employer::class);
             $table->string('name');
-            $table->string('pay');
+            $table->decimal('pay', 10, 2);
             $table->timestamps();
         });
     }
