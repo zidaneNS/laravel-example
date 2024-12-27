@@ -35,7 +35,10 @@
                             <x-nav-link href="/login" :active="request()->is('login')">Login</x-nav-link>
                         @endguest
                         @auth
-                            <x-nav-link href="/logout" :active="request()->is('logout')">Logout</x-nav-link>                            
+                            <form action="/logout" method="post">
+                                @csrf
+                                <x-form-submit>logout</x-form-submit>
+                            </form>                          
                         @endauth
                     </div>
                 </div>
