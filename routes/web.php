@@ -10,7 +10,7 @@ Route::view('/', 'home');
 
 Route::get('jobs', [JobListController::class, 'index']);
 Route::post('jobs', [JobListController::class, 'store']);
-Route::get('jobs/create', [JobListController::class, 'create']);
+Route::get('jobs/create', [JobListController::class, 'create'])->middleware('auth');
 Route::get('jobs/{joblist}', [JobListController::class, 'show'])->middleware('auth');
 Route::put('jobs/{joblist}', [JobListController::class, 'update'])->can('update', 'joblist');
 Route::delete('jobs/{joblist}', [JobListController::class, 'destroy']);

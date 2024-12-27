@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employer;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
@@ -19,7 +19,11 @@ class RegisterController extends Controller
             'password' => ['required', Password::min(6)->letters()]
         ]);
 
-        User::create($attributes);
+        $user = User::create($attributes);
+        Employer::create([
+            'name' => $attributes['name'],
+            'user_id' => $user->id
+        ]);
 
         return redirect('login');
     }

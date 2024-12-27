@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobList;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobListController extends Controller
 {
@@ -22,7 +22,7 @@ class JobListController extends Controller
         JobList::create([
             "name" => request()->name,
             "pay" => request()->pay,
-            "employer_id" => 1
+            "employer_id" => Auth::user()->employer->id
         ]);
         // redirect
         return redirect('/jobs');
@@ -47,7 +47,7 @@ class JobListController extends Controller
         JobList::findOrFail($joblist->id)->update([
             "name" => request()->name,
             "pay" => request()->pay,
-            "employer_id" => 1
+            "employer_id" => $joblist->employer->id
         ]);
         // redirect
         return redirect('/jobs');

@@ -8,6 +8,9 @@
         <x-form-input name="password" type="password">Password</x-form-input>
         <x-form-input name="password_confirmation" type="password">Confirm Password</x-form-input>
 
+        <p>Already have an account ?</p>
+        <a href="/login" class="text-blue-600 hover:underline">Sign In Here!</a>
+
         <x-form-button-group>
             <x-form-cancel href="/">Cancel</x-form-cancel>
             <x-form-submit>Sign Up</x-form-submit>
